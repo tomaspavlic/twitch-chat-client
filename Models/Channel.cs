@@ -10,7 +10,7 @@ using Topdev.Twitch.Chat.Models;
 
 namespace Topdev.Twitch.Chat.Client
 {
-    public class Channel : IChannel
+    public class Channel
     {
         public string Name { get; private set; }
 

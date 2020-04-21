@@ -19,7 +19,7 @@ namespace Topdev.Twitch.Chat.Client
         
         private MessageParser _parser = new MessageParser();
 
-        protected ICollection<IChannel> _channels = new List<IChannel>();
+        protected ICollection<Channel> _channels = new List<Channel>();
 
         public TwitchChatClient()
         {
@@ -50,7 +50,7 @@ namespace Topdev.Twitch.Chat.Client
 
             if (_parser.TryParsePrivateMessage(e, out var message))
             {
-                var c = (Channel)_channels.FirstOrDefault(c => c.Name == message.Channel);
+                var c = _channels.FirstOrDefault(c => c.Name == message.Channel);
                 c?.ReceiveMessage(message);
             }
         }
@@ -82,10 +82,11 @@ namespace Topdev.Twitch.Chat.Client
         /// <param name="channelName">A channel name</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IChannel> JoinChannelAsync(string channelName, CancellationToken cancellationToken)
+        public async Task<Channel> JoinChannelAsync(string channelName, CancellationToken cancellationToken)
         {
-            await _twitchMessageClient.SendMessageAsync($"JOIN #{channelName.ToLower()}", cancellationToken);
-            var channel = new Channel(channelName, _twitchMessageClient);
+            var cn = channelName.ToLower();
+            await _twitchMessageClient.SendMessageAsync($"JOIN #{cn}", cancellationToken);
+            var channel = new Channel(cn, _twitchMessageClient);
             _channels.Add(channel);
 
             return channel;

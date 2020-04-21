@@ -16,14 +16,20 @@ var client = new TwitchChatClient();
 
 ### Subscribe for events
 ```csharp
-client.MessageReceived += OnMessageReceived;
 client.ConnectionClose += OnConnectionClosed;
 ```
 
 ### Connect and receive messages
 ```csharp
 await client.ConnectAsync("oauth:bzccixdfsdf5uwz2qrlkad390jz1cp", "username", cts.Token);
-await client.JoinChannelAsync("onscreen", cts.Token);
+var channel = await client.JoinChannelAsync("onscreen", cts.Token);
+channel.MessageReceived += OnMessageReceived;
+```
+
+### Get channel chat information
+Get information like number of viewers, list of viewers, admins, staff, global mods, etc..
+```csharp
+channel.Info
 ```
 
 ## How to generate OAuth token

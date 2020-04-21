@@ -12,5 +12,17 @@ namespace Topdev.Twitch.Chat.Client.Models
 
         [JsonPropertyName("moderators")]
         public string[] Moderators { get; set; }
+
+        [JsonPropertyName("staff")]
+        public string[] Staff { get; set; }
+
+        [JsonPropertyName("admins")]
+        public string[] Admins { get; set; }
+
+        [JsonPropertyName("global_mods")]
+        public string[] GlobalMods { get; set; }
+
+        [JsonPropertyName("viewers")]
+        public string[] Viewers { get; set; }
     }
 }
