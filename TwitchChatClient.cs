@@ -1,21 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Topdev.Twitch.Chat.Client.Models;
 using Topdev.Twitch.Chat.Helpers;
 using Topdev.Twitch.Chat.MessageClients;
 using Topdev.Twitch.Chat.Models;
 
-namespace Topdev.Twitch.Chat
+namespace Topdev.Twitch.Chat.Client
 {
     public class TwitchChatClient
     {
-        public event EventHandler<Message> MessageReceived;
 
         public event EventHandler ConnectionClose;
 
         private IMessageClient _twitchMessageClient;
         
         private MessageParser _parser = new MessageParser();
+
+        protected ICollection<IChannel> _channels = new List<IChannel>();
 
         public TwitchChatClient()
         {
@@ -46,7 +50,8 @@ namespace Topdev.Twitch.Chat
 
             if (_parser.TryParsePrivateMessage(e, out var message))
             {
-                MessageReceived?.Invoke(this, message);
+                var c = (Channel)_channels.FirstOrDefault(c => c.Name == message.Channel);
+                c?.ReceiveMessage(message);
             }
         }
 
@@ -72,37 +77,18 @@ namespace Topdev.Twitch.Chat
         }
 
         /// <summary>
-        /// Sends a private message to a channel.
-        /// </summary>
-        /// <param name="channel">A channel name.</param>
-        /// <param name="message">Message to be send. Limited to 512 bytes.</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task SendMessageAsync(string channel, string message, CancellationToken cancellationToken)
-        {
-            return _twitchMessageClient.SendMessageAsync($"PRIVMSG #{channel} :{message}", cancellationToken);
-        }
-
-        /// <summary>
         /// Joins to given twitch channel. Connection must be established first.
         /// </summary>
-        /// <param name="channel">A channel name</param>
+        /// <param name="channelName">A channel name</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task JoinChannelAsync(string channel, CancellationToken cancellationToken)
+        public async Task<IChannel> JoinChannelAsync(string channelName, CancellationToken cancellationToken)
         {
-            return _twitchMessageClient.SendMessageAsync($"JOIN #{channel.ToLower()}", cancellationToken);
-        }
+            await _twitchMessageClient.SendMessageAsync($"JOIN #{channelName.ToLower()}", cancellationToken);
+            var channel = new Channel(channelName, _twitchMessageClient);
+            _channels.Add(channel);
 
-        /// <summary>
-        /// Departs from a channel.
-        /// </summary>
-        /// <param name="channel"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task LeaveChannelAsync(string channel, CancellationToken cancellationToken)
-        {
-            return _twitchMessageClient.SendMessageAsync($"PART #{channel.ToLower()}", cancellationToken);
+            return channel;
         }
 
         /// <summary>
