@@ -1,7 +1,6 @@
 using System;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Topdev.Twitch.Chat.Client.Models;
@@ -13,8 +12,6 @@ namespace Topdev.Twitch.Chat.Client
     public class Channel
     {
         public string Name { get; private set; }
-
-        public ChatInfo Info => GetChatInfo();
 
         public event EventHandler<Message> MessageReceived;
 
@@ -49,17 +46,22 @@ namespace Topdev.Twitch.Chat.Client
             return _messageClient.SendMessageAsync($"PART #{Name.ToLower()}", cancellationToken);
         }
 
+        /// <summary>
+        /// Retrieves current channel chat information.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ChatInfo> GetChatInformationAsync()
+        {
+            var httpClient = new HttpClient();
+            var jsonResponse = await httpClient.GetStreamAsync($"https://tmi.twitch.tv/group/user/{Name}/chatters");
+            var chatInfo = await JsonSerializer.DeserializeAsync<ChatInfo>(jsonResponse);
+
+            return chatInfo;
+        }
+
         internal void ReceiveMessage(Message message)
         {
             MessageReceived?.Invoke(this, message);
-        }
-
-        private ChatInfo GetChatInfo()
-        {
-            var httpClient = new HttpClient();
-            var jsonResponse = httpClient.GetStringAsync($"https://tmi.twitch.tv/group/user/{Name}/chatters").Result;
-
-            return JsonSerializer.Deserialize<ChatInfo>(jsonResponse);
         }
     }
 }

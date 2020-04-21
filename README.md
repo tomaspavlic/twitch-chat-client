@@ -29,7 +29,7 @@ channel.MessageReceived += OnMessageReceived;
 ### Get channel chat information
 Get information like number of viewers, list of viewers, admins, staff, global mods, etc..
 ```csharp
-channel.Info
+var info = await channel.GetChatInformationAsync();
 ```
 
 ## How to generate OAuth token
