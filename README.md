@@ -11,6 +11,15 @@ Connect to a channel’s chat with an IRC client instead of using the Web interf
 
 > The library currently support WebSocket only. The IRC will be implemented as well.
 
+## Installation
+```bash
+## .NET CLI
+dotnet add package Topdev.Twitch.Chat.Client
+
+## Package Manager
+Install-Package Topdev.Twitch.Chat.Client
+```
+
 ## Usage
 
 ### Connect
@@ -41,3 +50,9 @@ To authenticate, your password (`PASS`) should be an OAuth token authorized thro
 
 The token must have the prefix `oauth:`. For example, if your token is `abcd`, you send `oauth:abcd`.
 To quickly get a token for your account, use this [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/).
+
+
+## Donations
+Please feel free to donate to me. I'm not going to force you to donate, you can use my software completely free of charge and without limitation for any purpose you want. If you really want to give something to me then you are welcome to do so. I don't expect donations, nor do I insist that you give them.
+
+**ETH** - 22a99ed4ebe631ff87332e6bcdcc6ef5ec01289f
