@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topdev.Twitch.Chat.Client", "src\Topdev.Twitch.Chat.Client.csproj", "{315EDC64-6C9D-4BAF-A191-8A3FBA7E0649}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topdev.Twitch.Chat.Client.Tests", "tests\Topdev.Twitch.Chat.Client.Tests.csproj", "{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{315EDC64-6C9D-4BAF-A191-8A3FBA7E0649}.Release|x64.Build.0 = Release|Any CPU
 		{315EDC64-6C9D-4BAF-A191-8A3FBA7E0649}.Release|x86.ActiveCfg = Release|Any CPU
 		{315EDC64-6C9D-4BAF-A191-8A3FBA7E0649}.Release|x86.Build.0 = Release|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Debug|x64.Build.0 = Debug|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Release|x64.ActiveCfg = Release|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Release|x64.Build.0 = Release|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BCC896F-5D6A-426A-BC17-FD5D10DCF34E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
