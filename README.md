@@ -1,5 +1,9 @@
 # Twitch Chat Client
 
+![build](https://github.com/tomaspavlic/twitch-chat-client/workflows/build/badge.svg)
+![downloads](https://img.shields.io/nuget/dt/Topdev.Twitch.Chat.Client)
+![nuget](https://img.shields.io/nuget/v/Topdev.Twitch.Chat.Client)
+
 Twitch offers an IRC interface to our chat functionality. This allows you to, for instance:
 
 Develop one or more bots for your channel.
